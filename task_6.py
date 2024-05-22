@@ -63,3 +63,4 @@ dp_selected_items, dp_total_calories = dynamic_programming(items, budget)
 print("\nDynamic Programming Algorithm:")
 print("Selected items:", dp_selected_items)
 print("Total calories:", dp_total_calories)
+#progress
