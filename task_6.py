@@ -38,7 +38,6 @@ def dynamic_programming(items, budget):
             else:
                 dp[i][w] = dp[i - 1][w]
 
-    # Визначаємо вибрані предмети
     selected_items = []
     w = budget
     for i in range(n, 0, -1):
@@ -51,7 +50,7 @@ def dynamic_programming(items, budget):
     return selected_items, total_calories
 
 
-# Приклад використання
+
 budget = 100
 
 greedy_selected_items, greedy_total_calories = greedy_algorithm(items, budget)
@@ -63,4 +62,3 @@ dp_selected_items, dp_total_calories = dynamic_programming(items, budget)
 print("\nDynamic Programming Algorithm:")
 print("Selected items:", dp_selected_items)
 print("Total calories:", dp_total_calories)
-#progress
