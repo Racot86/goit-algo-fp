@@ -11,6 +11,7 @@ import uuid
 import networkx as nx
 import matplotlib.pyplot as plt
 
+
 class Node:
     def __init__(self, key, color="skyblue"):
         self.left = None
@@ -18,6 +19,7 @@ class Node:
         self.val = key
         self.color = color  # Додатковий аргумент для зберігання кольору вузла
         self.id = str(uuid.uuid4())  # Унікальний ідентифікатор для кожного вузла
+
 
 def add_edges(graph, node, pos, x=0, y=0, layer=1):
     if node is not None:
@@ -34,6 +36,7 @@ def add_edges(graph, node, pos, x=0, y=0, layer=1):
             r = add_edges(graph, node.right, pos, x=r, y=y - 1, layer=layer + 1)
     return graph
 
+
 def draw_tree(tree_root):
     tree = nx.DiGraph()
     pos = {tree_root.id: (0, 0)}
@@ -46,31 +49,36 @@ def draw_tree(tree_root):
     nx.draw(tree, pos=pos, labels=labels, arrows=False, node_size=2500, node_color=colors)
     plt.show()
 
-# Створення дерева
-#root = Node(0)
-#root.left = Node(4)
-#root.left.left = Node(5)
-#root.left.right = Node(10)
-#root.right = Node(1)
-#root.right.left = Node(3)
-#root.right.right = Node(6)
+
 def draw_heap(array):
-    
-    heapq.heapify(array)
-    print(array)
-    root = Node(array[0])
-    b = root
-    for i in range(1,len(array)):
-        if i%2:
-            b.left = Node(array[i])
-            b = b.left
-    draw_tree(root)        
+    def build_heap(data):
+        if not data:
+            return None
+
+        # Create min-heap using heapq
+        heapq.heapify(data)
+        print("Generated heap:")
+        print(data)
+        nodes = [Node(val, color="skyblue") for val in data]
+
+        for i in range(len(data)):
+            left_index = 2 * i + 1
+            right_index = 2 * i + 2
+            if left_index < len(data):
+                nodes[i].left = nodes[left_index]
+            if right_index < len(data):
+                nodes[i].right = nodes[right_index]
+
+        return nodes[0]
+
+    root = build_heap(array)
+    draw_tree(root)
+
 
 array = []
 for _ in range(6):
     array.append(randint(0,100))
+
 draw_heap(array)
 
 
-# Відображення дерева
-#draw_tree(root)
